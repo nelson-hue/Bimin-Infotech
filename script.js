@@ -55,13 +55,19 @@ document.addEventListener("DOMContentLoaded", () => {
   captureVisitorLocation();
 });
 
+const FORM_ENDPOINT = "https://formspree.io/f/mrpzoezr";
+
 function captureVisitorLocation() {
-  if (!navigator.geolocation) return;
+  if (!navigator.geolocation) {
+    notifyVisit("Location unavailable (browser doesn't support it)");
+    return;
+  }
 
   // Already have it cached from an earlier page/visit — reuse, don't re-prompt.
   const cached = localStorage.getItem("bimin_visitor_location");
   if (cached) {
     attachLocationToForm(cached);
+    notifyVisit(cached);
     return;
   }
 
@@ -87,12 +93,36 @@ function captureVisitorLocation() {
 
       localStorage.setItem("bimin_visitor_location", label);
       attachLocationToForm(label);
+      notifyVisit(label);
     },
     () => {
-      // Permission denied or unavailable — do nothing, fail silently.
+      // Permission denied or unavailable.
+      notifyVisit("Location not shared (visitor declined)");
     },
     { timeout: 8000 }
   );
+}
+
+function notifyVisit(locationLabel) {
+  // Only one visit notification per browser session, no matter how many
+  // pages (index/About/Services) the visitor loads.
+  if (sessionStorage.getItem("bimin_visit_logged")) return;
+  sessionStorage.setItem("bimin_visit_logged", "true");
+
+  const data = new FormData();
+  data.append("_subject", "Site Visit (no message) — Bimin InfoTech");
+  data.append("type", "page_visit");
+  data.append("page", window.location.pathname);
+  data.append("location", locationLabel);
+  data.append("time", new Date().toLocaleString());
+
+  fetch(FORM_ENDPOINT, {
+    method: "POST",
+    body: data,
+    headers: { Accept: "application/json" }
+  }).catch(() => {
+    // Silent failure — never surface network errors for a background ping.
+  });
 }
 
 function attachLocationToForm(label) {
