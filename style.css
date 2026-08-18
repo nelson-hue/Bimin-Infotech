@@ -194,6 +194,24 @@ button:hover {
   color: #ffffff;
 }
 
+.services-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.services-heading h2 {
+  margin-bottom: 0;
+}
+
+.service-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
 .section-sub {
   text-align: center;
   color: var(--muted);

@@ -1,0 +1,18 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradCable" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#A3E635"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="120" height="120" rx="20" fill="#1B2050"/>
+  <rect x="0.5" y="0.5" width="119" height="119" rx="19.5" fill="none" stroke="#2D3568"/>
+  <!-- ethernet plug body -->
+  <rect x="50" y="30" width="20" height="26" rx="3" fill="#FF8D5F"/>
+  <rect x="54" y="32" width="2.4" height="10" fill="#131736"/>
+  <rect x="58" y="32" width="2.4" height="10" fill="#131736"/>
+  <rect x="62" y="32" width="2.4" height="10" fill="#131736"/>
+  <!-- cable -->
+  <path d="M60 56 C60 66, 40 66, 40 78 C40 90, 60 90, 60 100" stroke="url(#gradCable)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M60 56 C60 66, 80 66, 80 78 C80 90, 60 90, 60 100" stroke="url(#gradCable)" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.55"/>
+</svg>

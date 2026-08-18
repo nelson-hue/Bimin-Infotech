@@ -1,0 +1,22 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradNet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="120" height="120" rx="20" fill="#1B2050"/>
+  <rect x="0.5" y="0.5" width="119" height="119" rx="19.5" fill="none" stroke="#2D3568"/>
+  <!-- router body -->
+  <rect x="30" y="66" width="60" height="24" rx="6" fill="url(#gradNet)"/>
+  <circle cx="42" cy="78" r="3" fill="#131736"/>
+  <circle cx="52" cy="78" r="3" fill="#131736"/>
+  <!-- antennas -->
+  <line x1="45" y1="66" x2="40" y2="46" stroke="#FF8D5F" stroke-width="3" stroke-linecap="round"/>
+  <line x1="75" y1="66" x2="80" y2="46" stroke="#FF8D5F" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="40" cy="44" r="3.5" fill="#FF8D5F"/>
+  <circle cx="80" cy="44" r="3.5" fill="#FF8D5F"/>
+  <!-- signal arcs -->
+  <path d="M50 58 A12 12 0 0 1 70 58" stroke="#A3E635" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M44 50 A22 22 0 0 1 76 50" stroke="#A3E635" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+</svg>
