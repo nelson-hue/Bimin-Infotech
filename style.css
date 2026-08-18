@@ -1,14 +1,47 @@
+/* ===== Design tokens =====
+   Background : #131736 (deep navy, from brand card)
+   Surface    : #1B2050
+   Border     : #2D3568
+   Accent     : #FF8D5F (coral, from brand card)
+   Accent2    : #FFB088 (light coral hover)
+   Gradient   : cyan #22D3EE -> violet #A78BFA -> lime #A3E635 (from wordmark)
+   Text       : #EAEDFB (primary) / #9AA3C7 (muted)
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #131736;
+  --surface: #1B2050;
+  --surface-2: #202763;
+  --border: #2D3568;
+  --accent: #FF8D5F;
+  --accent-light: #FFB088;
+  --text: #EAEDFB;
+  --muted: #9AA3C7;
+  --grad: linear-gradient(90deg, #22D3EE 0%, #A78BFA 50%, #A3E635 100%);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: #0f172a;
-  color: #e2e8f0;
+  background-color: var(--bg);
+  color: var(--text);
   line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: "Space Grotesk", "Inter", sans-serif;
 }
 
 /* Header / Navbar */
@@ -16,110 +49,211 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 2rem;
-  background: #1e293b;
-  border-bottom: 1px solid #334155;
+  padding: 1rem 2rem;
+  background: rgba(19, 23, 54, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 1.4rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.35rem;
   font-weight: 700;
-  color: #38bdf8;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .logo img {
-  height: 36px;
-  width: 36px;
+  height: 40px;
+  width: 40px;
   object-fit: contain;
-  border-radius: 6px;
 }
 
 .navbar nav a {
-  color: #94a3b8;
+  color: var(--muted);
   text-decoration: none;
-  margin-left: 1.5rem;
+  margin-left: 1.75rem;
+  font-weight: 500;
+  font-size: 0.95rem;
   transition: color 0.2s ease;
 }
 
 .navbar nav a:hover {
-  color: #ffffff;
+  color: var(--accent-light);
 }
 
 /* Hero */
 .hero {
+  position: relative;
   text-align: center;
-  padding: 5rem 1.5rem;
-  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  padding: 6rem 1.5rem 5rem;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(135deg, transparent 46%, rgba(255,141,95,0.12) 47%, transparent 48%),
+    linear-gradient(135deg, transparent 60%, rgba(255,141,95,0.10) 61%, transparent 62%);
+  pointer-events: none;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 1.5rem;
 }
 
 .hero h1 {
-  font-size: 2.5rem;
+  position: relative;
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  font-weight: 700;
   margin-bottom: 1rem;
   color: #ffffff;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero .tagline {
+  font-family: "Space Grotesk", sans-serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--accent-light);
+  margin-bottom: 0.75rem;
 }
 
 .hero p {
-  font-size: 1.15rem;
-  color: #94a3b8;
+  font-size: 1.05rem;
+  color: var(--muted);
   max-width: 600px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 2.25rem;
 }
 
 button {
-  background-color: #0284c7;
-  color: white;
+  background: var(--accent);
+  color: #131736;
   border: none;
-  padding: 0.75rem 1.75rem;
+  padding: 0.8rem 1.9rem;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: "Space Grotesk", sans-serif;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 button:hover {
-  background-color: #0369a1;
+  background: var(--accent-light);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  margin-left: 0.75rem;
+}
+
+.btn-ghost:hover {
+  background: var(--surface);
+  border-color: var(--accent);
+  color: var(--accent-light);
 }
 
 /* Services */
 .services {
   padding: 4rem 2rem;
-  max-width: 1100px;
+  max-width: 1150px;
   margin: 0 auto;
 }
 
 .services h2, .contact h2 {
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.75rem;
   color: #ffffff;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
 }
 
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
 }
 
 .card {
-  background: #1e293b;
-  padding: 2rem;
-  border-radius: 8px;
-  border: 1px solid #334155;
+  background: var(--surface);
+  padding: 1.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
 }
 
 .card h3 {
-  color: #38bdf8;
-  margin-bottom: 0.75rem;
+  color: var(--accent-light);
+  font-size: 1.05rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.card ul {
+  list-style: none;
+}
+
+.card ul li {
+  position: relative;
+  padding-left: 1.1rem;
+  margin-bottom: 0.65rem;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+.card ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
 /* Contact Form */
 .contact {
   padding: 4rem 2rem;
-  max-width: 600px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
@@ -132,14 +266,14 @@ form {
 input, textarea {
   padding: 0.8rem;
   border-radius: 6px;
-  border: 1px solid #334155;
-  background: #1e293b;
-  color: white;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
   font-size: 0.95rem;
 }
 
 input:focus, textarea:focus {
-  outline: 2px solid #38bdf8;
+  outline: 2px solid var(--accent);
 }
 
 #form-feedback {
@@ -148,11 +282,69 @@ input:focus, textarea:focus {
   font-weight: 500;
 }
 
+/* Contact info block */
+.contact-info {
+  max-width: 640px;
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.contact-info a,
+.contact-info span {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.contact-info a:hover {
+  border-color: var(--accent);
+  color: var(--accent-light);
+}
+
+.contact-info .icon {
+  color: var(--accent);
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
 /* Footer */
 footer {
   text-align: center;
   padding: 2rem;
-  border-top: 1px solid #334155;
-  color: #64748b;
-  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
+  color: #6672a3;
+  font-size: 0.85rem;
+}
+
+footer .gst {
+  display: block;
+  margin-top: 0.35rem;
+  color: #4c5788;
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+  .navbar nav a {
+    margin: 0 0.6rem;
+  }
+  .hero {
+    padding: 3.5rem 1.25rem;
+  }
 }
